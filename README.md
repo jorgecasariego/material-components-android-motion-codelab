@@ -15,3 +15,11 @@ code is available on the `complete` branch, which can you can checkout by
 running `git checkout complete`.
 
 <img src="screenshots/reply-transitions.gif" alt="Reply transitions"/>
+
+## Container Transform
+
+A container transform in the MDC-Android library is called a MaterialContainerTransform. By default, 
+this Transition subclass operates as a shared element transition, meaning the Android Transition 
+system is able to pick up two views in different layouts when marked with a transitionName.
+
+

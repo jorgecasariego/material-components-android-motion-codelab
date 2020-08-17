@@ -26,6 +26,7 @@
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         app:paddingTopSystemWindowInsets="@{true}"
-        app:paddingBottomSystemWindowInsets="@{true}"/>
+        app:paddingBottomSystemWindowInsets="@{true}"
+        android:transitionGroup="true"/>
 
 </layout>
