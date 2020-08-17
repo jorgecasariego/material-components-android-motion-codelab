@@ -30,6 +30,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.findNavController
+import com.google.android.material.transition.MaterialElevationScale
 import com.materialstudies.reply.R
 import com.materialstudies.reply.data.EmailStore
 import com.materialstudies.reply.databinding.ActivityMainBinding
@@ -268,7 +269,24 @@ class MainActivity : AppCompatActivity(),
     }
 
     private fun navigateToCompose() {
-        // TODO: Set up MaterialElevationScale transition as exit and reenter transitions.
+        // 6. Set up MaterialElevationScale transition as exit and reenter transitions.
+        /**
+         * Note that the duration of our MaterialElevationScale is the same as the duration of
+         * MaterialContainerTransform. This ensures the HomeFragment is held for the same amount
+         * of time as it takes for the container transform to run and will disappear as soon as
+         * the container transform is finished.
+         */
+
+        currentNavigationFragment?.apply {
+            exitTransition = MaterialElevationScale(false).apply {
+                duration = resources.getInteger(R.integer.reply_motion_duration_large).toLong()
+            }
+
+            reenterTransition = MaterialElevationScale(true).apply {
+                duration = resources.getInteger(R.integer.reply_motion_duration_large).toLong()
+            }
+        }
+
         val directions = ComposeFragmentDirections.actionGlobalComposeFragment(currentEmailId)
         findNavController(R.id.nav_host_fragment).navigate(directions)
     }
