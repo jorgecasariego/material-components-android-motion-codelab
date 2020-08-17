@@ -29,6 +29,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.ItemTouchHelper
 import com.google.android.material.transition.MaterialElevationScale
+import com.google.android.material.transition.MaterialFadeThrough
 import com.materialstudies.reply.R
 import com.materialstudies.reply.data.Email
 import com.materialstudies.reply.data.EmailStore
@@ -61,7 +62,22 @@ class HomeFragment : Fragment(), EmailAdapter.EmailAdapterListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // TODO: Set up MaterialFadeThrough enterTransition.
+        // 9. Set up MaterialFadeThrough enterTransition.
+        /**
+         * The above setup differs slightly from previous steps due to the way mailboxes work.
+         * A mailbox is simply a HomeFragment plus an argument that tells the fragment which list
+         * of emails to display. This, in addition to the fact that HomeFragment is set to
+         * singleTop=true in our navigation graph, means you always navigate forward to new
+         * mailboxes and don't need to deal with return or reenter transitions (transitions that
+         * run when a fragment is popped). For this reason, all you need to worry about is setting
+         * the HomeFragment enter and exit transitions.
+         *
+         * This is an example of an architectural scenario which affects the way transitions are
+         * configured.
+         */
+        enterTransition = MaterialFadeThrough().apply {
+            duration = resources.getInteger(R.integer.reply_motion_duration_large).toLong()
+        }
     }
 
     override fun onCreateView(
